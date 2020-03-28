@@ -51,8 +51,19 @@ public class Main {
         primerLibro.leyendaLibro();
 
         /*1.H*/
-        /*Autor segundoAutor=new Autor("Matias", "Portela", "matiasportela@email.com", 'M');*/
+        int posAutor=0;
+        int cantAutores=3;
+        Autor[] arregloAutores= new Autor[cantAutores];
 
+        arregloAutores[posAutor]=primerAutor;
+        posAutor++;
+
+        Autor segundoAutor=new Autor("Matias", "Portela", "matiasportela@email.com", 'M');
+        arregloAutores[posAutor]=segundoAutor;
+        posAutor++;
+
+        LibroConArregloAutor otroLibro = new LibroConArregloAutor("Effective Java", 450, 150, arregloAutores);
+        otroLibro.leyendaLibro(2);
 
     }
 }

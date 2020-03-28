@@ -1,19 +1,20 @@
+
 package com.company;
 
 import java.util.Scanner;
 
-public class Libro {
+public class LibroConArregloAutor {
 
     private String titulo;
     private double precio;
     private int stock;
-    protected Autor autorLibro;
+    protected Autor[] autoresLibro;
 
-    public Libro(String titulo, double precio, int stock, Autor infoAutor) {
+    public LibroConArregloAutor(String titulo, double precio, int stock, Autor[] arregloAutores) {
         this.titulo = titulo;
         this.precio = precio;
         this.stock = stock;
-        this.autorLibro = infoAutor;
+        this.autoresLibro = arregloAutores;
     }
 
 
@@ -41,20 +42,22 @@ public class Libro {
         this.stock = stock;
     }
 
-    public Autor getAutorLibro() {
-        return autorLibro;
+    public Autor[] getAutoresLibro() {
+        return autoresLibro;
     }
 
-    public void setAutorLibro(Autor autorLibro) {
-        this.autorLibro = autorLibro;
+    public void setAutoresLibro(Autor[] autoresLibro) {
+        this.autoresLibro = autoresLibro;
     }
 
-    public void mostrarLibro() {
+    public void mostrarLibro(Autor[] arregloAutores, int cantidadAutores) {
 
         System.out.println("\nTitulo: " + titulo);
         System.out.println("Precio: " + precio);
         System.out.println("Stock: " + stock + " unidades");
-        autorLibro.mostrarAutor();
+        for (int posAutor=0; posAutor<cantidadAutores; posAutor++) {
+            autoresLibro[posAutor].mostrarAutor();
+        }
     }
 
     public void aumentarPrecio(){
@@ -78,8 +81,19 @@ public class Libro {
 
     }
 
-    public void leyendaLibro(){
-        System.out.println("\nEl libro '" + titulo + "' de " + autorLibro.getNombre() + " " + autorLibro.getApellido() + ", se vende a $" + precio + ".");
+    public void leyendaLibro(int validosAutores){
+
+        System.out.print("\nEl libro '" + titulo + "' de ");
+
+        for (int posAutor=0; posAutor<validosAutores; posAutor++) {
+            System.out.print(autoresLibro[posAutor].getNombre() + " " + autoresLibro[posAutor].getApellido());
+
+            if (autoresLibro[posAutor + 1]!=null){
+                System.out.print(", y de ");
+            }
+        }
+
+        System.out.print("se vende a $" + precio + ".\n");
     }
 
 }
