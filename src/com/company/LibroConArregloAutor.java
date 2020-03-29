@@ -93,7 +93,7 @@ public class LibroConArregloAutor {
             }
         }
 
-        System.out.print("se vende a $" + precio + ".\n");
+        System.out.print(" se vende a $" + precio + ".\n");
     }
 
 }
