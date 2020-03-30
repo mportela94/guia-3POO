@@ -3,9 +3,12 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        ejercicio1();
 
+        /*ejercicio1();
+
+        ejercicio2();*/
+
+        ejercicio3();
 
 
     }
@@ -68,18 +71,7 @@ public class Main {
     }
 
     public static void ejercicio2(){
-        /*2.    Nos contratan para hacer un programa que lleve el control de las ventas de un
-            local. Para esto es necesario modelar la clase Cliente, que posee un atributo id
-            como identificador del cliente, el mismo debe ser un valor compuesto por letras y
-            números aleatorios que se generan automáticamente al crear un Cliente. El Cliente
-            también posee un nombre, un email y un porcentaje de descuento.
-                Por otro lado vamos a tener el objeto Factura que representa una venta del
-            local, cada Factura posee un identificador de las mismas características que el
-            usado en Cliente. A su vez cada factura posee un monto total, una fecha y el Cliente
-            que generó la compra. Para la fecha de la venta se le va a asignar la fecha y hora al
-            momento de creación del objeto Factura. El tipo Factura debe contar con un
-            método que calcule el monto final luego de aplicarle el descuento que posee el
-            cliente.
+            /*2.
                     a. Investigue la clase UUID y sus métodos estáticos para la generación de los
                     ids. Investigue la clase LocalDate y sus métodos estáticos para la generación
                     de la fecha.
@@ -98,5 +90,48 @@ public class Main {
                     precio unitario. Considere las modificaciones necesarias en el tipo Factura
                     para que el mismo pueda almacenar múltiples Ítems de venta y a su vez
                     calcular los montos totales con y sin el descuento aplicado.*/
+
+        /*1.B*/
+        ClienteFactura unClienteFactura =new ClienteFactura("Juan Arias", "jarias@gmail.com", 10);
+        unClienteFactura.mostrarCliente();
+
+        /*1.C*/
+        Factura unaFactura=new Factura(1000, unClienteFactura);
+        double importe=unaFactura.getMontoTotal();
+
+        System.out.println("\nMonto Total: " + importe);
+        System.out.println("\nMonto Final con Descuento: " + unaFactura.aplicarDescuento(importe));
+
+        /*1.D*/
+        unaFactura.imprimirFactura();
+
+
+    }
+
+    public static void ejercicio3(){
+        /*3. Necesitamos crear un programa para manejar los datos de una Cuenta bancaria de
+            un Cliente. Para esto identificamos los atributos id, nombre y género (M o F) para el
+            Cliente. Por otro lado tenemos el tipo Cuenta que también posee un identificador,
+            un balance y un Cliente que es el dueño de la cuenta. La Cuenta debe exponer los
+            métodos depositar y extraer que modifican el balance de la misma. Algo a tener en
+            cuenta es que el método extraer no puede extraer dinero si el balance total no lo
+            permite, si esto sucede se debe imprimir un mensaje por pantalla que indique que
+            la cuenta no posee saldo suficiente.
+                    a. Crear un Cliente e imprimirlo en pantalla.
+                    b. Crear una Cuenta bancaria para el Cliente anterior con un saldo inicial de
+                    10000.
+                    c. Realizar operaciones de depósito y extracción para probar esa
+                    funcionalidad.
+                    d. Es necesario agregar una variante de Cuenta que permita un saldo deudor,
+                    de máximo 2000 pesos. Esto significa que la cuenta puede aceptar un
+                    balance negativo con un máximo de - 2000. Realice los cambios y pruebas
+                    necesarias.
+                    e. Analice cómo implementaría con las herramientas conocidas hasta el
+                    momento, llevar un registro de como máximo 10 operaciones de depósito y
+                    extracción que se realizaron en la cuenta. En donde se almacene en
+                    memoria de alguna forma la siguiente cadena de texto:
+                        i. Depósito: "El {NombreCliente}, depositó {MontoDepositado}"
+                        ii. Extracción: "El {NombreCliente}, retiró {MontoRetirado}"*/
+
     }
 }
