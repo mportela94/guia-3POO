@@ -1,12 +1,14 @@
 package com.company;
 
+import com.company.ejercicio3.ClienteBanco;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        /*ejercicio1();
+        ejercicio1();
 
-        ejercicio2();*/
+        ejercicio2();
 
         ejercicio3();
 
@@ -65,7 +67,7 @@ public class Main {
         arregloAutores[posAutor]=segundoAutor;
         posAutor++;
 
-        LibroConArregloAutor otroLibro = new LibroConArregloAutor("Effective Java", 450, 150, arregloAutores);
+        LibroConArregloAutor otroLibro = new com.company.LibroConArregloAutor("Effective Java", 450, 150, arregloAutores);
         otroLibro.leyendaLibro(posAutor);
 
     }
@@ -132,6 +134,9 @@ public class Main {
                     memoria de alguna forma la siguiente cadena de texto:
                         i. Depósito: "El {NombreCliente}, depositó {MontoDepositado}"
                         ii. Extracción: "El {NombreCliente}, retiró {MontoRetirado}"*/
+
+        ClienteBanco nuevoCliente = new ClienteBanco("Matias Portela", 'M');
+        nuevoCliente.mostrarCliente();
 
     }
 }

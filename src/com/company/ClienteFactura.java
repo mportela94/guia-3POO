@@ -10,12 +10,13 @@ public class ClienteFactura {
         números aleatorios que se generan automáticamente al crear un Cliente. El Cliente
         también posee un nombre, un email y un porcentaje de descuento.*/
 
-    private UUID idCliente=UUID.randomUUID();
+    private UUID idCliente;
     private String nombre;
     private String email;
     protected int descuento;
 
     public ClienteFactura(String nombre, String email, int descuento){
+        this.idCliente=UUID.randomUUID();
         this.nombre=nombre;
         this.email=email;
         this.descuento=descuento;

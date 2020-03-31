@@ -1,5 +1,7 @@
 package com.company;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -13,12 +15,14 @@ public class Factura {
     método que calcule el monto final luego de aplicarle el descuento que posee el
     cliente.*/
 
-    private UUID idFactura=UUID.randomUUID();
+    private UUID idFactura;
     private double montoTotal;
-    private Date fecha=new Date();
+    private Date fecha;
     private ClienteFactura unClienteFactura;
 
     public Factura(double montoTotal, ClienteFactura unClienteFactura){
+        this.idFactura=UUID.randomUUID();
+        this.fecha=new Date();
         this.montoTotal=montoTotal;
         this.unClienteFactura = unClienteFactura;
     }
