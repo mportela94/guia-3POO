@@ -1,15 +1,16 @@
 package com.company;
 
 import com.company.ejercicio3.ClienteBanco;
+import com.company.ejercicio3.CuentaBancaria;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        ejercicio1();
+        /*ejercicio1();
 
         ejercicio2();
-
+        */
         ejercicio3();
 
 
@@ -135,8 +136,40 @@ public class Main {
                         i. Depósito: "El {NombreCliente}, depositó {MontoDepositado}"
                         ii. Extracción: "El {NombreCliente}, retiró {MontoRetirado}"*/
 
+        /*1.A*/
         ClienteBanco nuevoCliente = new ClienteBanco("Matias Portela", 'M');
         nuevoCliente.mostrarCliente();
+
+        /*1.B*/
+        CuentaBancaria nuevaCuenta = new CuentaBancaria(nuevoCliente, 10000);
+        nuevaCuenta.mostrarCuenta();
+
+        /*1.C*/
+
+        nuevaCuenta.depositoEnCuenta(5000);
+        System.out.println("\nCuenta despues de un deposito:");
+        nuevaCuenta.mostrarCuenta();
+
+        nuevaCuenta.extraccionDeCuenta(3000);
+        System.out.println("\nCuenta despues de una extraccion:");
+        nuevaCuenta.mostrarCuenta();
+
+        /*1.D*/
+
+        nuevaCuenta.extraccionDeCuenta(13000);
+        System.out.println("\nCuenta despues de una extraccion:");
+        nuevaCuenta.mostrarCuenta();
+
+        nuevaCuenta.extraccionDeCuenta(1000);
+        System.out.println("\nCuenta despues de otra extraccion:");
+        nuevaCuenta.mostrarCuenta();
+
+        nuevaCuenta.depositoEnCuenta(3000);
+        System.out.println("\nCuenta despues de otro deposito:");
+        nuevaCuenta.mostrarCuenta();
+
+        /*1.E*/
+        nuevaCuenta.mostrarMovimientos();
 
     }
 }
