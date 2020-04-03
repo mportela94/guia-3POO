@@ -69,18 +69,18 @@ public class CuentaBancaria {
     public void depositoEnCuenta (double deposito){
         double dineroDisponible;
 
-        if (saldoDeudor<2000){
-            double saldoAdeudado = 2000-saldoDeudor;
-            dineroDisponible= balance + (deposito-saldoAdeudado);
-            if (dineroDisponible<0){
-                setSaldoDeudor(2000+dineroDisponible);
-                setBalance(0);
+        if (saldoDeudor<2000){  //SI HA UTILIZADO EL SALDO DEUDOR
+            double saldoAdeudado = 2000-saldoDeudor;    //SETEA LA PLATA QUE DEBE EL CLIENTE AL BANCO
+            dineroDisponible= balance + (deposito-saldoAdeudado);   //SUMA AL BALANCE EL DEPOSITO MENOS LA DEUDA QUE PROVOCO USAR EL SALDO DEUDOR
+            if (dineroDisponible<0){    //ESTOQ QUIERE DECIR QUE EL CLIENTE DEPOSITO MENOS QUE LA DEUDA DEL SALDO DEUDOR (SALDO DEUDOR 500$, DEPOSITO DE $100)
+                setSaldoDeudor(2000+dineroDisponible);  //LE SUMA EL DEPOSITO AL SALDO DEUDOR
+                setBalance(0);  //EL CLIENTE NO TERMINO DE PAGAR EL SALDO ADEUDADO
             }else{
-                setSaldoDeudor(2000);
-                setBalance(dineroDisponible);
+                setSaldoDeudor(2000);   //SI EL DEPOSITO ES MAYOR AL SALDO ADEUDADO, EL SALDO DEUDOR DISPONIBLE SE REINICIA
+                setBalance(dineroDisponible);   //SETEA EL BALANCE NUEVO
             }
         }else{
-            dineroDisponible = balance+deposito;
+            dineroDisponible = balance+deposito;    //SI NO UTILIZO EL SALDO DEUDOR, DIRECTAMENTE SUMA EL DEPOSITO AL BALANCE
             setBalance(dineroDisponible);
         }
 
@@ -88,17 +88,17 @@ public class CuentaBancaria {
     }
 
     public void extraccionDeCuenta (double extraccion){
-        if (balance<extraccion){
-            if ((balance+saldoDeudor)<extraccion || saldoDeudor==0){
+        if (balance<extraccion){    //EN ESTE CASO SI EL MONTO QUE SE QUIERE EXTRAER ES MAYOR QUE EL QUE TIENE DISPONIBLE EN LA CUENTA
+            if ((balance+saldoDeudor)<extraccion || saldoDeudor==0){ //SE FIJA SI TIENE SALDO DEUDOR DISPONIBLE PARA HACER LA EXTRACCION
                 System.out.println("\nNo es posible hacer la extraccion por falta de fondos.");
-            }else{
-                double prestamoExtraccion=balance-extraccion;
-                setSaldoDeudor(saldoDeudor+prestamoExtraccion);
-                setBalance(0);
+            }else{  //SI PUEDE USAR EL SALDO DEUDOR
+                double prestamoExtraccion=balance-extraccion;   //CANTIDAD DE SALDO DEUDOR UTILIZADO
+                setSaldoDeudor(saldoDeudor+prestamoExtraccion); //CANTIDAD DE SALDO DEUDOR DISPONIBLE DESPUES DE LA EXTRACCION
+                setBalance(0);  //COMO USO SU BALANCE+SALDO DEUDOR EL BALANCE DE CUENTA ES IGUAL A CERO
             }
         }else{
-            double dineroDisponible = balance - extraccion;
-            setBalance(dineroDisponible);
+            double dineroDisponible = balance - extraccion; //SI NO ES NECESARIO EL SALDO DEUDOR O ES MENOR LA CANTIDAD EXTRAIDA A LA DISPONIBLE DIRECTAMENTE RESTO LA EXTRACCION DEL BALANCE
+            setBalance(dineroDisponible); //SETEO EL BALANCE CON LA CANTIDAD DE DINERO QUE HAYA QUEDADO DESPUES DE LA EXTRACCION
         }
 
         cargarArregloExtraccion(cliente, extraccion);
@@ -107,15 +107,28 @@ public class CuentaBancaria {
     public void cargarArregloDeposito(@NotNull ClienteBanco cliente, double monto){
         int posMovimiento=getValidosMovimientos();
 
-        movimientosCuenta[posMovimiento]="El cliente " + cliente.getNombre() + ", deposito $" + monto;
-        setValidosMovimientos(posMovimiento+1);
+        if (posMovimiento==10) {
+            moverString();
+            posMovimiento--;
+            movimientosCuenta[posMovimiento] = "El cliente " + cliente.getNombre() + ", deposito $" + monto;
+        }else{
+            movimientosCuenta[posMovimiento] = "El cliente " + cliente.getNombre() + ", deposito $" + monto;
+            setValidosMovimientos(posMovimiento + 1);
+        }
     }
 
-    public void cargarArregloExtraccion(@NotNull ClienteBanco cliente, double monto){
-        int posMovimiento=getValidosMovimientos();
+    public void cargarArregloExtraccion(@NotNull ClienteBanco cliente, double monto) {
+        int posMovimiento = getValidosMovimientos();
 
-        movimientosCuenta[posMovimiento]="El cliente " + cliente.getNombre() + ", extrajo $" + monto;
-        setValidosMovimientos(posMovimiento+1);
+        if (posMovimiento == 10) { //EN CASO DE QUE EL ARREGLO ESTE LLENO
+            moverString();          // MUEVO EL STRING UNA POSICION PARA ATRAS BORRANDO EL STRING GUARDADO EN POS=0
+            posMovimiento--;        // VUELVO UN LUGAR PARA ATRAS PARA SETEARME EN LA ULTIMA POSICION DEL ARREGLO
+            movimientosCuenta[posMovimiento] = "El cliente " + cliente.getNombre() + ", extrajo $" + monto; //GUARDO EL NUEVO MOVIMIENTO
+        } else {    // SI EL ARREGLO NO ESTA LLENO
+            movimientosCuenta[posMovimiento] = "El cliente " + cliente.getNombre() + ", extrajo $" + monto; //CARGO EN LA POSICION QUE ESTOY PARADO
+            setValidosMovimientos(posMovimiento + 1);   //MUEVO UN ESPACIO PARA QUE LA PROXIMA QUE TENGA QUE CARGAR YA ESTE PARADO EN DONDE DEBE
+
+        }
     }
 
     public void mostrarMovimientos(){
@@ -124,6 +137,13 @@ public class CuentaBancaria {
         for(int i=0; i<movimientosValidos;i++){
             System.out.println(movimientosCuenta[i]);
         }
+    }
+
+    public void moverString(){
+        for (int pos=0; pos<9; pos++){
+            movimientosCuenta[pos]=movimientosCuenta[pos+1];    //SI EL STRING ESTA LLENO MUEVO LA INFORMACION UN ESPACIO PARA ATRAS PARA DEJAR UN ESPACIO LIBRE Y SIEMPRE ME MUESTRE LOS ULTIMOS 10 MOVIMIENTOS
+        }
+
     }
 
 

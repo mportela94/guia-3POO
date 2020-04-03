@@ -68,7 +68,7 @@ public class Main {
         arregloAutores[posAutor]=segundoAutor;
         posAutor++;
 
-        LibroConArregloAutor otroLibro = new com.company.LibroConArregloAutor("Effective Java", 450, 150, arregloAutores);
+        LibroConArregloAutor otroLibro = new LibroConArregloAutor("Effective Java", 450, 150, arregloAutores);
         otroLibro.leyendaLibro(posAutor);
 
     }
@@ -167,6 +167,7 @@ public class Main {
         nuevaCuenta.depositoEnCuenta(3000);
         System.out.println("\nCuenta despues de otro deposito:");
         nuevaCuenta.mostrarCuenta();
+
 
         /*1.E*/
         nuevaCuenta.mostrarMovimientos();
