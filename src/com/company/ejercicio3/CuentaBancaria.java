@@ -2,6 +2,7 @@ package com.company.ejercicio3;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Scanner;
 import java.util.UUID;
 
 public class CuentaBancaria {
@@ -146,5 +147,40 @@ public class CuentaBancaria {
 
     }
 
+    /*hecho para sacarme el aburrimiento*/
+    public void subprogramaCajeroAutomatico(){
+        char control='s';
+        char opcion;
+        double monto;
+        Scanner scanOpcion= new Scanner(System.in);
+        Scanner scanMonto= new Scanner(System.in);
 
+        while (control=='s' || control=='S') {
+            System.out.println("Ingrese E para extraccion, D para deposito");
+            opcion=scanOpcion.next().charAt(0);
+            if (opcion == 'E' || opcion == 'e') {
+                System.out.println("Ingrese el monto que quiere extraer:");
+                monto=scanMonto.nextDouble();
+                extraccionDeCuenta(monto);
+                control=devuelveControl();
+            } else if (opcion == 'D' || opcion == 'd') {
+                System.out.println("Ingrese el monto que quiere depositar:");
+                monto=scanMonto.nextDouble();
+                depositoEnCuenta(monto);
+                control=devuelveControl();
+            } else {
+                System.out.println("Ingrese una opcion correcta (E o D)");
+            }
+        }
+    }
+
+    public char devuelveControl(){
+        Scanner scanControl=new Scanner(System.in);
+        char control;
+
+        System.out.println("Quiere hacer otra operatoria? S/N");
+        control= scanControl.next().charAt(0);
+        return control;
+
+    }
 }

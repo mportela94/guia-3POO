@@ -172,5 +172,9 @@ public class Main {
         /*1.E*/
         nuevaCuenta.mostrarMovimientos();
 
+        nuevaCuenta.subprogramaCajeroAutomatico();
+
+
+
     }
 }
