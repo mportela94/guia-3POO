@@ -69,7 +69,7 @@ public class Main {
         posAutor++;
 
         LibroConArregloAutor otroLibro = new LibroConArregloAutor("Effective Java", 450, 150, arregloAutores);
-        otroLibro.leyendaLibro(posAutor);
+        otroLibro.leyendaLibro();
 
     }
 
@@ -139,10 +139,14 @@ public class Main {
         /*1.A*/
         ClienteBanco nuevoCliente = new ClienteBanco("Matias Portela", 'M');
         nuevoCliente.mostrarCliente();
+        String unString=nuevoCliente.toString();
+        System.out.println(unString);
 
         /*1.B*/
         CuentaBancaria nuevaCuenta = new CuentaBancaria(nuevoCliente, 10000);
         nuevaCuenta.mostrarCuenta();
+
+
 
         /*1.C*/
 

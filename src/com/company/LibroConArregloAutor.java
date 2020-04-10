@@ -1,6 +1,8 @@
 
 package com.company;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Scanner;
 
 public class LibroConArregloAutor {
@@ -50,12 +52,12 @@ public class LibroConArregloAutor {
         this.autoresLibro = autoresLibro;
     }
 
-    public void mostrarLibro(Autor[] arregloAutores, int cantidadAutores) {
+    public void mostrarLibro(@NotNull Autor[] arregloAutores) {
 
         System.out.println("\nTitulo: " + titulo);
         System.out.println("Precio: " + precio);
         System.out.println("Stock: " + stock + " unidades");
-        for (int posAutor=0; posAutor<cantidadAutores; posAutor++) {
+        for (int posAutor=0; posAutor<arregloAutores.length; posAutor++) {
             autoresLibro[posAutor].mostrarAutor();
         }
     }
@@ -81,11 +83,11 @@ public class LibroConArregloAutor {
 
     }
 
-    public void leyendaLibro(int validosAutores){
+    public void leyendaLibro(){
 
         System.out.print("\nEl libro '" + titulo + "' de ");
 
-        for (int posAutor=0; posAutor<validosAutores; posAutor++) {
+        for (int posAutor=0; posAutor<autoresLibro.length; posAutor++) {
             System.out.print(autoresLibro[posAutor].getNombre() + " " + autoresLibro[posAutor].getApellido());
 
             if (autoresLibro[posAutor + 1]!=null){

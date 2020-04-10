@@ -34,4 +34,12 @@ public class ClienteBanco {
         System.out.println("Nombre y Apellido: " + nombre);
         System.out.println("Genero: " + genero);
     }
+
+    @Override
+    public String toString() {
+        return "\n idCliente=" + idCliente +
+                "\n, nombre='" + nombre + '\'' +
+                "\n, genero=" + genero +
+                '\n';
+    }
 }
